@@ -47,7 +47,7 @@
         "ignorePropertyModificationsFor": ["state"]
       }
     ],
-    "linebreak-style": ["error", "unix"],
+    "linebreak-style": ["off"],
     "quotes": [
       "error",
       "single",
@@ -63,6 +63,9 @@
     "comma-dangle": ["error"],
     "no-console": ["off"],
     "react-hooks/exhaustive-deps": ["warn"],
-    "dot-notation": ["off"]
+    "dot-notation": ["off"],
+    "consistent-return": ["off"],
+    "react/react-in-jsx-scope": ["off"],
+    "no-shadow": ["off"]
   }
 }
