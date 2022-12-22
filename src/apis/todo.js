@@ -1,17 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { TODOS_URL } from '../constants';
-import {
-  axiosInstance,
-  getAccessToken,
-  setAccessToken,
-  showErrorToast,
-  showSuccessToast,
-} from '../utils';
+import { axiosInstance, getAccessToken, showErrorToast } from '../utils';
 
 axiosInstance.interceptors.request.use((config) => {
   const accessToken = getAccessToken();
   if (accessToken !== '')
-    config.headers.Authorization = `Bearer ${getAccessToken()}`;
+    config.headers.Authorization = `Bearer ${accessToken}`;
   return config;
 });
 
@@ -31,9 +25,9 @@ export const getTodos = async () => {
   }
 };
 
-export const createTodo = async (data) => {
+export const createTodo = async (newTodo) => {
   try {
-    const response = await axiosInstance.post(`${TODOS_URL}`, data);
+    const response = await axiosInstance.post(`${TODOS_URL}`, newTodo);
 
     return response;
   } catch (error) {
@@ -46,13 +40,9 @@ export const createTodo = async (data) => {
   }
 };
 
-export const updateTodo = async (id, data) => {
+export const updateTodo = async (id, newTodo) => {
   try {
-    await axiosInstance.put(`todos/${id}`, data, {
-      headers: {
-        Authorization: `Bearer ${localStorage.access_token}`,
-      },
-    });
+    await axiosInstance.put(`${TODOS_URL}/${id}`, newTodo);
     const response = getTodos();
     return response;
   } catch (error) {
@@ -67,7 +57,7 @@ export const updateTodo = async (id, data) => {
 
 export const deleteTodo = async (id) => {
   try {
-    await axiosInstance.delete(`todos/${id}`);
+    await axiosInstance.delete(`${TODOS_URL}/${id}`);
     const response = getTodos();
     return response;
   } catch (error) {
