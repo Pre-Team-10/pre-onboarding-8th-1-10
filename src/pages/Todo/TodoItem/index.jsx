@@ -25,7 +25,6 @@ function TodoItem({ todoItem, setTodoList }) {
   };
 
   const handleUpdateBtnClick = (id, data) => () => {
-    console.log(id, data);
     updateTodo(id, data).then((res) => {
       setTodoList(res.data);
       setIsEdit(false);
