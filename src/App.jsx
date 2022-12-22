@@ -1,17 +1,15 @@
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { Auth } from './pages';
-import theme from './styles/theme';
+import Router from './routes/Routes';
 import { GlobalStyle } from './styles/GlobalStyle';
+import theme from './styles/theme';
 
 function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Routes>
-          <Route path="/" element={<Auth />} />
-        </Routes>
+        <Router />
       </ThemeProvider>
     </BrowserRouter>
   );
