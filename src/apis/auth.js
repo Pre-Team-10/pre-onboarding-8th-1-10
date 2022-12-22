@@ -1,6 +1,6 @@
 import { instance } from '../utils/instance';
 
-// 로그인 요청
+/** 로그인 요청 */
 export const handleSignin = async (userInfo) => {
   await instance
     .post('/auth/signin', userInfo)
@@ -12,11 +12,11 @@ export const handleSignin = async (userInfo) => {
     });
 };
 
-// 회원가입 요청
+/** 회원가입 요청 */
 export const handleSignup = async (userInfo) => {
   await instance
     .post('/auth/signup', userInfo)
-    .then((response) => {
+    .then(() => {
       alert('회원가입을 완료하셧습니다.');
     })
     .catch((error) => {

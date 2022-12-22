@@ -63,7 +63,7 @@ function LoginPage() {
         </LoginButton>
         <AccountText>
           Not a member?
-          <span>Creat Account</span>
+          <span>creat account</span>
         </AccountText>
       </LoginWhiteBox>
     </LoginSection>
