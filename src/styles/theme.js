@@ -14,6 +14,7 @@ const fontWeight = {
 
 const color = {
   primary: '#9844E8',
+  black: '#000000',
   secondary: '#EBE4F9',
   border: '#e1e2e3',
   text: '#373737',
