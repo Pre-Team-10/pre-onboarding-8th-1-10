@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as S from './styles';
+import { auth } from '../../apis/auth';
 import { Button, Input } from '../../components';
 import { useValidationCheck } from '../../hooks/useValidationCheck';
 import {
   emailValidationCheck,
   passwordValidationCheck,
 } from '../../utils/validationCheck';
-import { getAccessToken } from '../../utils';
-import { auth } from '../../apis/auth';
+import * as S from './styles';
 
 function Auth() {
   const [isSignInPage, setIsSignInPage] = useState(true);
@@ -29,12 +28,6 @@ function Auth() {
       onSuccess: () => navigate('/todo'),
     });
   };
-
-  useEffect(() => {
-    const accessToken = getAccessToken();
-    if (accessToken) navigate('/todo');
-    if (!accessToken) navigate('/');
-  }, [navigate]);
 
   return (
     <S.Container>
