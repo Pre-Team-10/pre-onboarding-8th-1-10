@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 import { useState } from 'react';
 
 export const useValidationCheck = (validationCheckCallback) => {

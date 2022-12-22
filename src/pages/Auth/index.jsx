@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './styles';
 import { Button, Input } from '../../components';
@@ -26,7 +26,7 @@ function Auth() {
       email,
       password,
       isSignInPage,
-      onSuccess: () => window.location.replace('/todo'),
+      onSuccess: () => navigate('/todo'),
     });
   };
 

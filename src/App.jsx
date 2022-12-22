@@ -1,4 +1,3 @@
-import React from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Auth } from './pages';
