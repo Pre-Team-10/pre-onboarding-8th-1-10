@@ -81,7 +81,7 @@ function LoginPage() {
             enter
           </Button>
           <Button type="button" onClick={toggleIsSignUp} isActive>
-            sign up
+            {isSignUp ? 'Sign In' : 'Sign Up'}
           </Button>
         </div>
       </SignForm>
