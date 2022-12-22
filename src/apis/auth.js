@@ -7,9 +7,16 @@ export const auth = async ({ email, password, isSignInPage, onSuccess }) => {
   try {
     await axiosInstance
       .post(url, body)
-      .then(({ data }) => setAccessToken(data.access_token));
+      .then(({ data: { access_token: accessToken } }) =>
+        setAccessToken(accessToken),
+      );
     if (onSuccess) onSuccess();
   } catch (error) {
-    alert('로그인에 실패했습니다.');
+    const {
+      response: {
+        data: { message },
+      },
+    } = error;
+    if (message) window.alert(message);
   }
 };
