@@ -10,12 +10,6 @@ function Todo() {
   const [todoList, setTodoList] = useState([]);
   const todoInputRef = useRef(null);
 
-  useEffect(() => {
-    getTodos().then((data) => {
-      if (data) setTodoList(data);
-    });
-  }, []);
-
   const TodoSubmitBtnHandler = (e) => {
     e.preventDefault();
     if (!todoInputRef.current?.value) return;
@@ -25,11 +19,9 @@ function Todo() {
 
     todoInputRef.current.value = null;
 
-    createTodo(newTodo)
-      .then((res) => {
-        setTodoList((prev) => [...prev, res.data]);
-      })
-      .catch((err) => alert(`${err}`));
+    createTodo(newTodo).then((res) => {
+      setTodoList((prev) => [...prev, res.data]);
+    });
   };
 
   const handleLogout = () => {
@@ -37,10 +29,19 @@ function Todo() {
     return navigate('/');
   };
 
+  useEffect(() => {
+    getTodos().then((data) => {
+      if (data) setTodoList(data);
+    });
+  });
+
   return (
     <S.TodoContainer>
       <S.TodoHeader>
-        <TbLogout onClick={handleLogout} />
+        <S.LogoutDiv onClick={handleLogout}>
+          로그아웃
+          <TbLogout />
+        </S.LogoutDiv>
         <S.TodoTitle>ToDo List</S.TodoTitle>
       </S.TodoHeader>
       <S.TodoInputContainer>
