@@ -8,17 +8,17 @@ import {
 
 export const auth = async ({ email, password, isSignInPage, onSuccess }) => {
   const body = { email, password };
-  const url = isSignInPage ? SIGNIN_URL : SIGNUP_URL;
-
+  const optionalObj = isSignInPage
+    ? { url: SIGNIN_URL, msg: '로그인 성공!' }
+    : { url: SIGNUP_URL, msg: '회원가입 성공!' };
   try {
     await axiosInstance
-      .post(url, body)
+      .post(optionalObj.url, body)
       .then(({ data: { access_token: accessToken } }) =>
         setAccessToken(accessToken),
       );
     if (onSuccess) {
-      const successMsg = isSignInPage ? '로그인 성공!' : '회원가입 성공!';
-      showSuccessToast(`${successMsg}`);
+      showSuccessToast(optionalObj.msg);
       return onSuccess();
     }
   } catch (error) {
