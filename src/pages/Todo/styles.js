@@ -5,7 +5,7 @@ import { Input } from '../../components/Input/styles';
 export const TodoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 600px;
   height: 600px;
   padding: 0 40px;
   gap: 20px;
@@ -15,7 +15,22 @@ export const TodoContainer = styled.div`
   background-color: rgba(${(props) => props.theme.color.secondary}, 0.7);
 `;
 
-export const TodoHeader = styled.header``;
+export const TodoHeader = styled.header`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const LogoutDiv = styled.div`
+  cursor: pointer;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+`;
 
 export const TodoTitle = styled.h1`
   margin-top: 30px;

@@ -11,10 +11,8 @@ export const TodoItemLayout = styled.div`
 
 export const OnEditWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  gap: 5px;
 `;
 
 export const TaskInfoWrapper = styled.div`
@@ -22,7 +20,7 @@ export const TaskInfoWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 10px;
-  gap: 5px;
+  gap: 30px;
 `;
 
 export const TaskInfoText = styled.p`
