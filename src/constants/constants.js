@@ -18,3 +18,5 @@ export const serverRoutes = {
 };
 
 export const minimumPwLength = 8;
+
+export const goodComment = '올바른 형식입니다. 😃';

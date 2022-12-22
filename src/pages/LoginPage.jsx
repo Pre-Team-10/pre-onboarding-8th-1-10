@@ -1,7 +1,18 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchAccessToken } from '../apis/api';
-import { clientRoutes, minimumPwLength } from '../constants/constants';
+import {
+  clientRoutes,
+  goodComment,
+  minimumPwLength,
+} from '../constants/constants';
+import {
+  Button,
+  CreateInput,
+  FormHeader,
+  SignForm,
+  Tip,
+} from '../styles/styles';
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -37,28 +48,43 @@ function LoginPage() {
   const toggleIsSignUp = () => setIsSignUp(!isSignUp);
   return (
     <div>
-      <h2>{isSignUp ? 'Sign Up' : 'Sign In'}</h2>
-      <form onSubmit={handleOnSubmit}>
-        <input ref={idInputRef} onChange={checkIdValidation} />
-        <span>
-          {id && (!isIdValid ? '이메일 형식의 아이디를 입력하세요.' : '')}
-        </span>
-        <input
+      <SignForm onSubmit={handleOnSubmit}>
+        <FormHeader>{isSignUp ? 'Sign Up' : 'Sign In'}</FormHeader>
+        <CreateInput
+          ref={idInputRef}
+          onChange={checkIdValidation}
+          type="email"
+          placeholder="email"
+        />
+        <Tip>
+          {id &&
+            (!isIdValid ? '이메일 형식의 아이디를 입력하세요.' : goodComment)}
+        </Tip>
+        <CreateInput
           ref={passwordInputRef}
           onChange={checkPwValidation}
           type="password"
+          placeholder="password"
         />
-        <span>
+        <Tip>
           {password &&
-            (!isPwValid ? `비밀번호는 ${minimumPwLength}자 이상입니다.` : '')}
-        </span>
-        <button type="submit" disabled={!isIdValid || !isPwValid}>
-          enter
-        </button>
-        <button type="button" onClick={toggleIsSignUp}>
-          sign up
-        </button>
-      </form>
+            (!isPwValid
+              ? `비밀번호는 ${minimumPwLength}자 이상입니다.`
+              : goodComment)}
+        </Tip>
+        <div className="buttons">
+          <Button
+            type="submit"
+            disabled={!isIdValid || !isPwValid}
+            isActive={isIdValid && isPwValid}
+          >
+            enter
+          </Button>
+          <Button type="button" onClick={toggleIsSignUp} isActive>
+            sign up
+          </Button>
+        </div>
+      </SignForm>
     </div>
   );
 }
