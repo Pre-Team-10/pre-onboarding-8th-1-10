@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { deleteTodo, fetchTodos, modifyTodo, postTodo } from '../../apis/todos';
-import { Input } from '../../components/Input/styles';
 import TodoElement from '../../components/TodoPage/TodoElement';
 import { deleteAccessToken } from '../../utils';
-import * as S from '../Auth/styles';
 import { SignOutBTN, Container, Form } from './styled';
 
 function Todo() {
