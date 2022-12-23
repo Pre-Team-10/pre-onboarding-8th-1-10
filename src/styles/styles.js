@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { inputColors, transparent } from './styleConstants';
+import { inputColors } from './theme';
 
 export const SignForm = styled.form`
   padding: 80px;
@@ -45,11 +45,11 @@ export const Button = styled.button`
   border-radius: 6px;
   color: ${({ isActive }) => (isActive ? 'white' : 'grey')};
   background-color: ${({ isActive }) =>
-    isActive ? inputColors.onFocused : transparent};
+    isActive ? inputColors.onFocused : 'transparent'};
   cursor: pointer;
   transition: all 1s;
   &:hover {
     background-color: ${({ isActive }) =>
-      isActive ? inputColors.normal : transparent};
+      isActive ? inputColors.normal : 'transparent'};
   }
 `;

@@ -6,6 +6,11 @@ const fontSize = {
   xlarge: '35px',
 };
 
+export const inputColors = {
+  normal: 'rgba(0, 0, 255, 0.2)',
+  onFocused: 'rgba(0, 0, 255, 0.5)',
+};
+
 const fontWeight = {
   thin: 300,
   regular: 400,
