@@ -17,7 +17,7 @@ export const Title = styled.h1`
 export const CreateTodoInput = styled.input`
   width: 400px;
   height: 50px;
-  font-size: 15px;
+  font-size: ${(props) => props.theme.fontSize.middle};
   padding: 5px;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
@@ -31,8 +31,8 @@ export const Button = styled.button`
   height: 50px;
   padding: 10px;
   margin-bottom: 30px;
-  font-size: 15px;
-  color: white;
+  font-size: ${(props) => props.theme.fontSize.small};
+  color: ${(props) => props.theme.color.white};
   background-color: black;
   border: none;
   cursor: pointer;
