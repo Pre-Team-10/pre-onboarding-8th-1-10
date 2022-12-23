@@ -1,35 +1,35 @@
 import { SIGNUP_URL, SIGNIN_URL } from '../constants';
 import {
   axiosInstance,
+  serverStatus,
   setAccessToken,
   showErrorToast,
   showSuccessToast,
+  statusMessageObj,
 } from '../utils';
-import { serverStatus } from './todos';
 
 export const auth = async ({ email, password, isSignInPage, onSuccess }) => {
-  const body = { email, password };
-  const optionalObj = isSignInPage
+  const newTodo = { email, password };
+  const optionalSignObj = isSignInPage
     ? { url: SIGNIN_URL, msg: '로그인 성공!' }
     : { url: SIGNUP_URL, msg: '회원가입 성공!' };
   try {
-    await axiosInstance
-      .post(optionalObj.url, body)
-      .then(({ data: { access_token: accessToken } }) =>
-        setAccessToken(accessToken),
-      );
-    if (onSuccess) {
-      showSuccessToast(optionalObj.msg);
+    const {
+      data: { access_token: accessToken },
+    } = await axiosInstance.post(optionalSignObj.url, newTodo);
+    setAccessToken(accessToken);
+    if (accessToken && onSuccess) {
+      showSuccessToast(optionalSignObj.msg);
       return onSuccess();
     }
-  } catch (error) {
+  } catch (e) {
     const {
       response: {
         data: { statusCode, message },
       },
-    } = error;
+    } = e;
     if (statusCode === serverStatus.unauthorized)
-      showErrorToast('입력하신 이메일과 비밀번호를 확인해주세요');
+      showErrorToast(statusMessageObj.idAndPwNotCorrectComment);
     else {
       showErrorToast(message);
     }
