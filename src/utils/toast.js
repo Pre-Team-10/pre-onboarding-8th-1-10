@@ -16,6 +16,7 @@ export const showWarningToast = (warningMsg) => {
     autoClose: true,
   });
 };
+
 export const showErrorToast = (errorMsg) => {
   toast.error(`${errorMsg}`, {
     autoClose: true,
