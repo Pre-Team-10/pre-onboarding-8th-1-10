@@ -73,7 +73,7 @@ function Todo() {
   useEffect(() => {
     (async () => {
       const fetchedTodos = await fetchTodos();
-      if (fetchedTodos) setTodos(fetchedTodos);
+      if (fetchedTodos) setTodos(fetchedTodos.reverse());
       else initializeUserInfo();
     })();
   }, []);
