@@ -8,6 +8,7 @@ import {
   passwordValidationCheck,
 } from '../../utils/validationCheck';
 import * as S from './styles';
+import { GlobalStyle } from '../../styles/GlobalStyle';
 
 function Auth() {
   const [isSignInPage, setIsSignInPage] = useState(true);
@@ -31,6 +32,7 @@ function Auth() {
 
   return (
     <S.Container>
+      <GlobalStyle />
       <S.LeftBox src="/Img/pre-onboarding.png" />
       <S.RightBox>
         <S.Title>{isSignInPage ? 'Sign In' : 'Sign Up'}</S.Title>
