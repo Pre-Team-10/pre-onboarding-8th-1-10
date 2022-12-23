@@ -47,6 +47,7 @@ function Auth() {
             value={password}
             message="비밀번호는 8자 이상입니다."
             onChange={handlePasswordChange}
+            password
           />
           <Button disabled={!isEmailValid || !isPasswordValid}>
             {isSignInPage ? 'Sign In' : 'Sign Up'}

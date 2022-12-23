@@ -19,8 +19,8 @@ export const Message = styled(Text)`
   height: 1px;
 `;
 
-export const Input = styled.input.attrs(() => ({
-  type: 'text',
+export const Input = styled.input.attrs((props) => ({
+  type: props.password ? 'password' : 'text',
 }))`
   width: 100%;
   height: 40px;
