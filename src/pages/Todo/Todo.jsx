@@ -5,12 +5,10 @@ import { getAccessToken } from '../../utils';
 import { getTodos, removeTodo, addTodo, updateTodo } from '../../apis/todo';
 import TodoInputWrap from './components/TodoInputWrap';
 import ItemList from './components/ItemList';
-// import styled from 'styled-components';
 import * as S from './styled';
 
 function Todo() {
   const navigate = useNavigate();
-  // const accessToken = localStorage.getItem('TOKEN');
   const [todoInputContent, setTodoInputContent] = useState('');
   const [todoUpdateContent, setTodoUpdateContent] = useState('');
   const [todoUpdateChecked, setTodoUpdateChecked] = useState(false);
@@ -24,8 +22,6 @@ function Todo() {
 
     /* Promise getData */
     getTodos().then((data) => {
-      console.log(todoList);
-      console.log(data);
       setTodoList([...data].map((list) => ({ ...list, modify: false })));
     });
   }, []);
@@ -66,13 +62,11 @@ function Todo() {
     e.preventDefault();
 
     const id = e.target.dataset.index;
-    console.log(id);
+
     updateTodo(id, todoUpdateContent, todoUpdateChecked);
     getTodos().then((data) => {
       if (data) setTodoList(data);
     });
-
-    console.log(todoList);
   };
 
   const toggleUpdateInputBox = (e) => {
@@ -98,7 +92,7 @@ function Todo() {
   };
 
   const logout = () => {
-    localStorage.removeItem('TOKEN');
+    localStorage.removeItem('ACCESS_TOKEN');
     navigate(`/`);
   };
 
@@ -120,6 +114,7 @@ function Todo() {
       />
       <ItemList
         todoList={todoList}
+        // handleCheckedList={handleCheckedList}
         toggleUpdateInputBox={toggleUpdateInputBox}
         handleUpdateInput={handleUpdateInput}
         setTodoUpdateContent={setTodoUpdateContent}
