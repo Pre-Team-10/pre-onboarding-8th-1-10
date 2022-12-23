@@ -117,8 +117,8 @@ export const Button = styled.button`
     border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
-    color: ${(props) => (props.isLoaded === false ? 'lightgray' : 'white')};
+    color: ${(props) => (props.isLoaded === true ? 'lightgray' : 'white')};
     background-color: ${(props) =>
-      props.isLoaded === false ? '#765413' : 'orange'};
+      props.disabled === true ? '#765413' : 'orange'};
   }
 `;

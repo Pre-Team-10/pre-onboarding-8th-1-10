@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { handleSignin } from '../../apis/auth';
+import { useNavigate } from 'react-router-dom';
+import { handleSignin } from '../../apis/index';
 import {
   LoginWhiteBox,
   LoginText,
@@ -10,6 +11,7 @@ import {
 } from './styled';
 
 function LoginBox({ setModal }) {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
@@ -26,7 +28,7 @@ function LoginBox({ setModal }) {
       } else if (userInfo.password < 8) {
         alert('비밀번호는 8자리이상입니다.');
       } else if (userInfo.password >= 8) {
-        handleSignin(userInfo);
+        handleSignin(userInfo, navigate);
       }
     }
   };

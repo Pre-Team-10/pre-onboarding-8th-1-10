@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Modal, WhiteModal, Button } from './styled';
-import { handleSignup } from '../../apis/auth';
+import { handleSignup } from '../../apis/index';
 
 function ModalBox({ modal, setModal }) {
   const [signUpId, setSignUpId] = useState('');
@@ -17,8 +17,16 @@ function ModalBox({ modal, setModal }) {
     email: '',
     password: '',
   });
+  // 회원가입버튼 활성/비활성
+  const [isLoaded, setIsloaded] = useState(true);
+  useEffect(() => {
+    if (IdCheck && PwCheck === false) {
+      setIsloaded(true);
+    } else if (IdCheck && PwCheck === true) {
+      setIsloaded(false);
+    }
+  }, [IdCheck, PwCheck]);
 
-  const [isLoaded, setIsloaded] = useState(false);
   return (
     <Modal modal={modal}>
       <WhiteModal>
@@ -43,6 +51,19 @@ function ModalBox({ modal, setModal }) {
             const box = { ...userInfo };
             box.email = e.target.value;
             setUserInfo(box);
+
+            const inputId = e.target.value;
+
+            if (inputId === '') {
+              setIdMessage('');
+            } else if (inputId.includes('@') === false) {
+              setIdCheck(false);
+              setIdMessage('@을 포함한 이메일형식의 Id를 입력해주세요.');
+            } else if (inputId.includes('@') === true) {
+              setIdCheck(true);
+              setIdMessage('올바른 양식입니다.');
+              setSignUpId(inputId);
+            }
           }}
         />
         <div>
@@ -58,10 +79,22 @@ function ModalBox({ modal, setModal }) {
             const box = { ...userInfo };
             box.password = e.target.value;
             setUserInfo(box);
+
+            const inputPw = e.target.value;
+            if (inputPw === '') {
+              setPwMessage('');
+            } else if (inputPw.length < 8) {
+              setPwCheck(false);
+              setPwMessage('8자리 이상으로 입력해주세요.');
+            } else {
+              setPwCheck(true);
+              setPwMessage('올바른 양식입니다.');
+              setSignUpPw(inputPw);
+            }
           }}
         />
         <Button
-          isLoaded={isLoaded}
+          disabled={isLoaded}
           type="button"
           onClick={() => {
             handleSignup(userInfo);
