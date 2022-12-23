@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import * as S from './styles';
 import { addTodo } from '../../../apis/todo';
+import { showWarningToast } from '../../../utils/toast';
+import * as S from './styles';
 
 function TodoInput({ setTodos }) {
   const [value, setValue] = useState('');
@@ -16,7 +17,7 @@ function TodoInput({ setTodos }) {
         setTodos((prev) => [...prev, res]);
       });
     } else {
-      alert('할 일을 입력해주세요.');
+      showWarningToast('할 일을 입력해주세요');
     }
   };
 

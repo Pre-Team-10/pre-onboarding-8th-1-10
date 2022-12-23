@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as S from './styles';
+import { TodoLogoutSVG } from '../../assets';
 import { TodoInput, TodoList } from '../../components';
 import { removeAccessToken } from '../../utils';
-import { TodoLogoutSVG } from '../../assets';
+import { showSuccessToast } from '../../utils/toast';
+import * as S from './styles';
 
 function Todo() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ function Todo() {
 
   const handleLogout = () => {
     removeAccessToken();
+    showSuccessToast('로그아웃 되었습니다.');
     navigate('/');
   };
 

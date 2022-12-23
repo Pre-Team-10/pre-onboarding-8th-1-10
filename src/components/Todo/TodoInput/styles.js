@@ -19,12 +19,14 @@ export const Title = styled.h2`
 export const Form = styled.div`
   margin-top: 2rem;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-wrap: nowrap;
 `;
 
 export const Input = styled.input`
   width: 16rem;
-  height: 2.5rem;
+  height: 2.6rem;
   border: 1px solid #e6e6e6;
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
