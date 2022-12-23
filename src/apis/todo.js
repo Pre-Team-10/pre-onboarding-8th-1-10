@@ -1,13 +1,11 @@
 /* eslint-disable consistent-return */
 import { axiosInstance, getAccessToken, showErrorToast } from '../utils';
 
-const accessToken = getAccessToken();
-
 export const getTodos = async () => {
   try {
     const { data } = await axiosInstance.get('/todos', {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${getAccessToken()}`,
       },
     });
     return data;
@@ -20,7 +18,7 @@ export const removeTodo = async (id) => {
   try {
     await axiosInstance.delete(`todos/${id}`, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${getAccessToken()}`,
       },
     });
   } catch (error) {
@@ -33,7 +31,7 @@ export const addTodo = async (newTodo) => {
   try {
     await axiosInstance.post('/todos', body, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${getAccessToken()}`,
       },
     });
   } catch (error) {
@@ -46,7 +44,7 @@ export const updateTodo = async ({ id, value, isChecked }) => {
   try {
     await axiosInstance.put(`/todos/${id}`, body, {
       headers: {
-        'Authorization': `Bearer ${accessToken}`,
+        'Authorization': `Bearer ${getAccessToken()}`,
         'Content-Type': 'application/json',
       },
     });
