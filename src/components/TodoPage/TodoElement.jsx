@@ -1,4 +1,12 @@
 import React, { useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCircleCheck,
+  faCircle,
+  faTrash,
+  faPencil,
+} from '@fortawesome/free-solid-svg-icons';
+import { TodoContainer, ReviseBTN } from './styled';
 
 function TodoElement({
   todo: { id, todo, isCompleted },
@@ -9,11 +17,11 @@ function TodoElement({
 }) {
   const modifyTodoInputRef = useRef(null);
   return (
-    <div>
+    <TodoContainer>
       {isTargetTodoId ? (
-        <span>
+        <>
           <input ref={modifyTodoInputRef} defaultValue={todo} />
-          <button
+          <ReviseBTN
             type="button"
             onClick={() =>
               handleOnModifyTodo(
@@ -25,36 +33,46 @@ function TodoElement({
             }
           >
             submit
-          </button>
+          </ReviseBTN>
           &nbsp;
-          <button type="button" onClick={() => toggleModifyInputBar(id)}>
+          <ReviseBTN type="button" onClick={() => toggleModifyInputBar(id)}>
             cancel
-          </button>
-        </span>
+          </ReviseBTN>
+        </>
       ) : (
-        <div>
-          <span>
-            <span>{todo.length > 40 ? `${todo.slice(0, 40)}...` : todo}</span>
-            <button
-              type="button"
-              onClick={() => handleOnModifyTodo(id, todo, isCompleted, true)}
-            >
-              {isCompleted ? 'DONE' : 'YET'}
-            </button>
-          </span>
+        <TodoContainer>
+          <button
+            type="button"
+            onClick={() => handleOnModifyTodo(id, todo, isCompleted, true)}
+          >
+            {isCompleted ? (
+              <FontAwesomeIcon className="Done" icon={faCircleCheck} />
+            ) : (
+              <FontAwesomeIcon className="Yet" icon={faCircle} />
+            )}
+          </button>
+          <p>{todo.length > 40 ? `${todo.slice(0, 40)}...` : todo}</p>
           &emsp;
-          <span>
-            <button type="button" onClick={() => toggleModifyInputBar(id)}>
-              modify
-            </button>
+          <div>
+            <FontAwesomeIcon
+              className="icon"
+              icon={faPencil}
+              onClick={() => {
+                toggleModifyInputBar(id);
+              }}
+            />
             &nbsp;
-            <button type="button" onClick={() => handleOnDeleteTodo(id)}>
-              delete
-            </button>
-          </span>
-        </div>
+            <FontAwesomeIcon
+              className="icon"
+              icon={faTrash}
+              onClick={() => {
+                handleOnDeleteTodo(id);
+              }}
+            />
+          </div>
+        </TodoContainer>
       )}
-    </div>
+    </TodoContainer>
   );
 }
 
