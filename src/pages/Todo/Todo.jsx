@@ -14,19 +14,21 @@ function Todo() {
   const [createTodo, setCreateTodo] = useState('');
   const [todoList, setTodoList] = useState([]);
 
-  useEffect(() => {
-    const getTodoList = async () => {
-      try {
-        if (getAccessToken()) {
-          const response = await getTodosApi(getAccessToken());
-          setTodoList(response.data);
-        }
-      } catch (e) {
-        showErrorToast(e.response.data.message);
+  const getTodoList = async () => {
+    try {
+      if (getAccessToken()) {
+        const response = await getTodosApi(getAccessToken());
+        setTodoList(response.data);
       }
-    };
+    } catch (e) {
+      showErrorToast(e.response.data.message);
+    }
+  };
+  getTodoList();
+
+  useEffect(() => {
     getTodoList();
-  });
+  }, []);
 
   const onCreateTodoHandler = (e) => {
     e.preventDefault();
