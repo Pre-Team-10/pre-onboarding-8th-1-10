@@ -5,12 +5,15 @@ const serverProblemComment = '서버에 문제가 있습니다!';
 
 const tokenProblemComment = '토큰이 유효하지 않습니다! 재로그인해주세요!';
 
-const serverStatus = {
+export const serverStatus = {
   noContent: 204,
   unauthorized: 401,
 };
 
-const handleStatusCode = (status) => {
+const handleStatusCode = (e) => {
+  const {
+    response: { status },
+  } = e;
   if (status === serverStatus.unauthorized) showErrorToast(tokenProblemComment);
   else showErrorToast(serverProblemComment);
 };
@@ -21,10 +24,7 @@ export const fetchTodos = async () => {
     const { data } = await axiosInstanceWithToken.get(TODO_URL);
     todos = data;
   } catch (e) {
-    const {
-      response: { status },
-    } = e;
-    handleStatusCode(status);
+    handleStatusCode(e);
   }
   return todos;
 };
@@ -37,10 +37,7 @@ export const postTodo = async (newTodoContent) => {
     });
     newTodo = data;
   } catch (e) {
-    const {
-      response: { status },
-    } = e;
-    handleStatusCode(status);
+    handleStatusCode(e);
   }
   return newTodo;
 };
@@ -60,10 +57,7 @@ export const modifyTodo = async (
     });
     modifiedTodo = data;
   } catch (e) {
-    const {
-      response: { status },
-    } = e;
-    handleStatusCode(status);
+    handleStatusCode(e);
   }
   return modifiedTodo;
 };
@@ -76,10 +70,7 @@ export const deleteTodo = async (todoId) => {
     );
     if (status === serverStatus.noContent) isDeleteSuccessful = true;
   } catch (e) {
-    const {
-      response: { status },
-    } = e;
-    handleStatusCode(status);
+    handleStatusCode(e);
   }
   return isDeleteSuccessful;
 };

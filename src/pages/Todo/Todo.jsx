@@ -59,6 +59,7 @@ function Todo() {
             todos.forEach((todo, index) => {
               if (todo.id === targetTodoId) {
                 todos.splice(index, 1, modifiedTodo);
+                return false;
               }
             });
             return [...todos];
@@ -78,6 +79,9 @@ function Todo() {
   }, []);
   return (
     <div>
+      <button type="button" onClick={initializeUserInfo}>
+        sign out
+      </button>
       <form onSubmit={handleOnNewTodoSubmit}>
         <h2>Write down what To Do</h2>
         <input ref={createTodoInputRef} />
