@@ -5,6 +5,7 @@ import {
   showErrorToast,
   showSuccessToast,
 } from '../utils';
+import { serverStatus } from './todos';
 
 export const auth = async ({ email, password, isSignInPage, onSuccess }) => {
   const body = { email, password };
@@ -27,7 +28,7 @@ export const auth = async ({ email, password, isSignInPage, onSuccess }) => {
         data: { statusCode, message },
       },
     } = error;
-    if (statusCode === 401)
+    if (statusCode === serverStatus.unauthorized)
       showErrorToast('입력하신 이메일과 비밀번호를 확인해주세요');
     else {
       showErrorToast(message);

@@ -16,7 +16,12 @@ function TodoElement({
           <button
             type="button"
             onClick={() =>
-              handleOnModifyTodo(id, modifyTodoInputRef.current.value)
+              handleOnModifyTodo(
+                id,
+                modifyTodoInputRef.current.value,
+                isCompleted,
+                undefined,
+              )
             }
           >
             submit
@@ -28,7 +33,15 @@ function TodoElement({
         </span>
       ) : (
         <div>
-          <span>{todo}</span>
+          <span>
+            <span>{todo.length > 40 ? `${todo.slice(0, 40)}...` : todo}</span>
+            <button
+              type="button"
+              onClick={() => handleOnModifyTodo(id, todo, isCompleted, true)}
+            >
+              {isCompleted ? 'DONE' : 'YET'}
+            </button>
+          </span>
           &emsp;
           <span>
             <button type="button" onClick={() => toggleModifyInputBar(id)}>

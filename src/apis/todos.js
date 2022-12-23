@@ -3,8 +3,19 @@ import { axiosInstanceWithToken, showErrorToast } from '../utils';
 
 const serverProblemComment = '서버에 문제가 있습니다!';
 
-const serverStatus = {
+const tokenProblemComment = '토큰이 유효하지 않습니다! 재로그인해주세요!';
+
+export const serverStatus = {
   noContent: 204,
+  unauthorized: 401,
+};
+
+const handleStatusCode = (e) => {
+  const {
+    response: { status },
+  } = e;
+  if (status === serverStatus.unauthorized) showErrorToast(tokenProblemComment);
+  else showErrorToast(serverProblemComment);
 };
 
 export const fetchTodos = async () => {
@@ -13,7 +24,7 @@ export const fetchTodos = async () => {
     const { data } = await axiosInstanceWithToken.get(TODO_URL);
     todos = data;
   } catch (e) {
-    showErrorToast(serverProblemComment);
+    handleStatusCode(e);
   }
   return todos;
 };
@@ -26,34 +37,40 @@ export const postTodo = async (newTodoContent) => {
     });
     newTodo = data;
   } catch (e) {
-    showErrorToast(serverProblemComment);
+    handleStatusCode(e);
   }
   return newTodo;
 };
 
-export const modifyTodo = async (modifiedTodoContent, todoId) => {
+export const modifyTodo = async (
+  todoId,
+  modifiedTodoContent,
+  isCompleted,
+  willCompleteChange,
+) => {
   let modifiedTodo = null;
   try {
     const { data } = await axiosInstanceWithToken.put(`${TODO_URL}/${todoId}`, {
       todo: modifiedTodoContent,
-      isCompleted: false,
+      isCompleted:
+        willCompleteChange === undefined ? isCompleted : !isCompleted,
     });
     modifiedTodo = data;
   } catch (e) {
-    showErrorToast(serverProblemComment);
+    handleStatusCode(e);
   }
   return modifiedTodo;
 };
 
 export const deleteTodo = async (todoId) => {
-  let isSuccessfulDelete = false;
+  let isDeleteSuccessful = false;
   try {
     const { status } = await axiosInstanceWithToken.delete(
       `${TODO_URL}/${todoId}`,
     );
-    if (status === serverStatus.noContent) isSuccessfulDelete = true;
+    if (status === serverStatus.noContent) isDeleteSuccessful = true;
   } catch (e) {
-    showErrorToast(serverProblemComment);
+    handleStatusCode(e);
   }
-  return isSuccessfulDelete;
+  return isDeleteSuccessful;
 };

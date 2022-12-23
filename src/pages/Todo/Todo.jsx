@@ -1,28 +1,38 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { deleteTodo, fetchTodos, modifyTodo, postTodo } from '../../apis/todos';
 import { Input } from '../../components/Input/styles';
 import TodoElement from '../../components/TodoPage/TodoElement';
+import { deleteAccessToken } from '../../utils';
 import * as S from '../Auth/styles';
 
 function Todo() {
+  const navigate = useNavigate();
   const [todos, setTodos] = useState([]);
   const [targetTodoId, setTargetTodoId] = useState(-1);
   const createTodoInputRef = useRef(null);
+  const initializeUserInfo = () => {
+    deleteAccessToken();
+    navigate('/');
+  };
   const handleOnNewTodoSubmit = async (e) => {
     e.preventDefault();
     const newTodoContent = createTodoInputRef.current.value;
     if (newTodoContent) {
       const newTodo = await postTodo(newTodoContent);
-      setTodos([newTodo, ...todos]);
-      createTodoInputRef.current.value = '';
+      if (newTodo) {
+        setTodos([newTodo, ...todos]);
+        createTodoInputRef.current.value = '';
+      } else initializeUserInfo();
     }
   };
   const handleOnDeleteTodo = useCallback(async (todoId) => {
-    if (deleteTodo(todoId)) {
+    const isDeleteSuccessful = await deleteTodo(todoId);
+    if (isDeleteSuccessful) {
       setTodos((todos) => {
         return todos.filter((todo) => todo.id !== todoId);
       });
-    }
+    } else initializeUserInfo();
   }, []);
   const toggleModifyInputBar = useCallback((todoId) => {
     setTargetTodoId((targetTodoId) => {
@@ -31,23 +41,31 @@ function Todo() {
     });
   }, []);
   const handleOnModifyTodo = useCallback(
-    async (targetTodoId, modifiedTodoContent) => {
+    async (
+      targetTodoId,
+      modifiedTodoContent,
+      isCompleted,
+      willCompleteChange,
+    ) => {
       if (modifiedTodoContent) {
         const modifiedTodo = await modifyTodo(
-          modifiedTodoContent,
           targetTodoId,
+          modifiedTodoContent,
+          isCompleted,
+          willCompleteChange,
         );
         if (modifiedTodo) {
           setTodos((todos) => {
             todos.forEach((todo, index) => {
               if (todo.id === targetTodoId) {
                 todos.splice(index, 1, modifiedTodo);
+                return false;
               }
             });
             return [...todos];
           });
           setTargetTodoId(-1);
-        }
+        } else initializeUserInfo();
       }
     },
     [],
@@ -55,11 +73,15 @@ function Todo() {
   useEffect(() => {
     (async () => {
       const fetchedTodos = await fetchTodos();
-      setTodos(fetchedTodos);
+      if (fetchedTodos) setTodos(fetchedTodos);
+      else initializeUserInfo();
     })();
   }, []);
   return (
     <div>
+      <button type="button" onClick={initializeUserInfo}>
+        sign out
+      </button>
       <form onSubmit={handleOnNewTodoSubmit}>
         <h2>Write down what To Do</h2>
         <input ref={createTodoInputRef} />
