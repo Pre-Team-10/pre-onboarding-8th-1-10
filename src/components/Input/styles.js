@@ -19,7 +19,7 @@ export const Message = styled(Text)`
   height: 1px;
 `;
 
-export const Input = styled.input.attrs((props) => ({
+export const Input = styled.input.attrs(() => ({
   type: 'text',
 }))`
   width: 100%;
