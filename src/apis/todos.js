@@ -37,7 +37,6 @@ export const postTodo = async (newTodoContent) => {
     });
     newTodo = data;
   } catch (e) {
-    console.log(e);
     const {
       response: { status },
     } = e;
