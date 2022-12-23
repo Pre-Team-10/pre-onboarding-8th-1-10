@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TodoItemLayout = styled.div`
+export const TodoItemLayout = styled.li`
   border: 2px solid ${(props) => props.theme.color.border};
   border-radius: 15px;
   display: flex;
@@ -13,6 +13,7 @@ export const OnEditWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 400px;
 `;
 
 export const TaskInfoWrapper = styled.div`

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
@@ -16,4 +16,11 @@ export const Button = styled.button`
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+  ${({ buttonType }) =>
+    buttonType === 'cancel' &&
+    css`
+      background-color: transparent;
+      color: black;
+    `}
 `;
