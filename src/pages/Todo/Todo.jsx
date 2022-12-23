@@ -4,29 +4,20 @@ import Header from '../../components/Header';
 import { GlobalStyle2 } from '../../styles/GlobalStyle2';
 import * as S from './styled';
 import TodoDetail from '../../components/TodoDetail';
+import { getTodos, addTodo } from '../../apis/todo';
 
 function Todo() {
   axios.defaults.baseURL = 'https://pre-onboarding-selection-task.shop';
   const [todoLists, setTodoLists] = useState([]);
   const [todo, setTodo] = useState('');
 
-  async function getTodoLists() {
-    try {
-      axios.defaults.headers.common['Authorization'] = '';
-      const JWTTOEKN = localStorage.getItem('ACCESS_TOKEN');
-      axios.defaults.headers.common['Authorization'] = `Bearer ${JWTTOEKN}`;
-      const res = await axios.get('/todos', {
-        withCredentials: false,
-      });
-      console.log(res.data);
-      setTodoLists(res.data);
-    } catch (error) {
-      console.log(error.response.data.message);
-    }
+  function getTodoLists() {
+    getTodos().then((res) => setTodoLists(res));
   }
+
   useEffect(() => {
     getTodoLists();
-  }, []);
+  }, [todoLists]);
 
   const todoHandler = (event) => {
     setTodo(event.currentTarget.value);
@@ -35,23 +26,9 @@ function Todo() {
     event.preventDefault();
     const result = window.confirm('등록하시겠습니까?');
     if (result) {
-      try {
-        axios.defaults.headers.common['Authorization'] = '';
-        const JWTTOEKN = localStorage.getItem('ACCESS_TOKEN');
-        axios.defaults.headers.common['Authorization'] = `Bearer ${JWTTOEKN}`;
-        const res = await axios.post(
-          '/todos',
-          { todo },
-          {
-            withCredentials: false,
-          },
-        );
-        console.log(res.data);
-        getTodoLists();
-        setTodo('');
-      } catch (error) {
-        console.log(error.response.data.message);
-      }
+      addTodo(todo);
+      getTodoLists();
+      setTodo('');
     }
   }
 
