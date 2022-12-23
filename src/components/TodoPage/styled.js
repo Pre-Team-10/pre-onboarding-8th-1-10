@@ -48,10 +48,8 @@ export const TodoContainer = styled.div`
 `;
 
 export const ReviseBTN = styled.button`
-   {
-    background-color: #00498c;
-    color: white;
-    border-radius: 5px;
-    width: 50px;
-  }
+  background-color: #00498c;
+  color: white;
+  border-radius: 5px;
+  width: 50px;
 `;
