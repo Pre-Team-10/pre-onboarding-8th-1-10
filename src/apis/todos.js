@@ -46,12 +46,18 @@ export const postTodo = async (newTodoContent) => {
   return newTodo;
 };
 
-export const modifyTodo = async (modifiedTodoContent, todoId) => {
+export const modifyTodo = async (
+  todoId,
+  modifiedTodoContent,
+  isCompleted,
+  willCompleteChange,
+) => {
   let modifiedTodo = null;
   try {
     const { data } = await axiosInstanceWithToken.put(`${TODO_URL}/${todoId}`, {
       todo: modifiedTodoContent,
-      isCompleted: false,
+      isCompleted:
+        willCompleteChange === undefined ? isCompleted : !isCompleted,
     });
     modifiedTodo = data;
   } catch (e) {

@@ -41,11 +41,18 @@ function Todo() {
     });
   }, []);
   const handleOnModifyTodo = useCallback(
-    async (targetTodoId, modifiedTodoContent) => {
+    async (
+      targetTodoId,
+      modifiedTodoContent,
+      isCompleted,
+      willCompleteChange,
+    ) => {
       if (modifiedTodoContent) {
         const modifiedTodo = await modifyTodo(
-          modifiedTodoContent,
           targetTodoId,
+          modifiedTodoContent,
+          isCompleted,
+          willCompleteChange,
         );
         if (modifiedTodo) {
           setTodos((todos) => {
