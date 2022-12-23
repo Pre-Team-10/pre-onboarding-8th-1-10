@@ -2,11 +2,11 @@
 
 **목차**
 
-- [프로젝트 소개](https://www.notion.so/2-3e77c41b54c241d99ce4b2bba06a7c3d)
-- [팀원 소개](https://www.notion.so/2-3e77c41b54c241d99ce4b2bba06a7c3d)
-- [구현 기능](https://www.notion.so/2-3e77c41b54c241d99ce4b2bba06a7c3d)
-- [프로젝트의 폴더 구조](https://www.notion.so/2-3e77c41b54c241d99ce4b2bba06a7c3d)
-- [Best practice 선정 사례](https://www.notion.so/2-3e77c41b54c241d99ce4b2bba06a7c3d)
+- [1.프로젝트 소개](#프로젝트-소개)
+- [2.팀원 소개](#팀원-소개)
+- [3.구현기능](#구현-기능)
+- [4.프로젝트 폴더 구조](#프로젝트-폴더-구조)
+- [5.Best practice 선정 사례](#Best-practice-선정-사례)
 
 ## 프로젝트 소개
 
@@ -34,6 +34,7 @@ npm start
 	<img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white" />
   <img src="https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white" />
   <img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white" />
+  <img src="https://img.shields.io/badge/React-Toastify-0082FC?style=for-the-badge&logoColor=white" />
 </div>
 
 
