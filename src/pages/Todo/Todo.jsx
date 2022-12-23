@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { deleteTodo, fetchTodos, modifyTodo, postTodo } from '../../apis/todos';
-import { Input } from '../../components/Input/styles';
 import TodoElement from '../../components/TodoPage/TodoElement';
 import { deleteAccessToken } from '../../utils';
-import * as S from '../Auth/styles';
+import { SignOutBTN, Container, Form } from './styled';
 
 function Todo() {
   const navigate = useNavigate();
@@ -78,15 +77,17 @@ function Todo() {
     })();
   }, []);
   return (
-    <div>
-      <button type="button" onClick={initializeUserInfo}>
+    <Container>
+      <SignOutBTN type="button" onClick={initializeUserInfo}>
         sign out
-      </button>
-      <form onSubmit={handleOnNewTodoSubmit}>
+      </SignOutBTN>
+      <Form onSubmit={handleOnNewTodoSubmit}>
         <h2>Write down what To Do</h2>
-        <input ref={createTodoInputRef} />
-        <button type="submit">enter</button>
-      </form>
+        <div>
+          <input ref={createTodoInputRef} />
+          <button type="submit">enter</button>
+        </div>
+      </Form>
       {todos.map((todo) => (
         <TodoElement
           key={todo.id}
@@ -97,7 +98,7 @@ function Todo() {
           isTargetTodoId={targetTodoId === todo.id}
         />
       ))}
-    </div>
+    </Container>
   );
 }
 
