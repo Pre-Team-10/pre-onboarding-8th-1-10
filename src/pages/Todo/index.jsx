@@ -1,27 +1,18 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { TodoItem } from '../../components';
 import { addTodo, getTodos } from '../../apis/todo';
-import { getAccessToken, showWarningToast } from '../../utils';
+import { showWarningToast } from '../../utils';
 import * as S from './styles';
 
 function Todo() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
-  const navigate = useNavigate();
 
   useEffect(() => {
-    const renderTodos = async () => {
-      if (!getAccessToken()) {
-        navigate('/');
-      }
-
-      if (getAccessToken()) {
-        const getResponse = await getTodos();
-        setTodos(() => getResponse);
-      }
-    };
-    renderTodos();
+    (async () => {
+      const getResponse = await getTodos();
+      setTodos(() => getResponse);
+    })();
   }, []);
 
   const handleChange = (e) => {
