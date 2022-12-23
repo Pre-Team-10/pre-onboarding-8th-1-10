@@ -4,6 +4,8 @@ export const GlobalStyle = createGlobalStyle`
 
   * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
   body {
@@ -38,5 +40,9 @@ export const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
     color: inherit;
+  }
+
+  ul, li {
+    list-style: none
   }
 `;
