@@ -35,8 +35,8 @@ function Todo() {
 
     if (newTodo.length) {
       await addTodo(newTodo);
-      const data = await getTodos();
-      setTodos(() => data);
+      const getResponse = await getTodos();
+      setTodos(() => getResponse);
     }
     setNewTodo('');
   };
