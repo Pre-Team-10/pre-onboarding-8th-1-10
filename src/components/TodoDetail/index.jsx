@@ -1,8 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import axios from 'axios';
+import { removeTodo } from '../../apis/todo';
 import * as S from './styles';
 
 export default function TodoDetail({ todoList }) {
+  axios.defaults.baseURL = 'https://pre-onboarding-selection-task.shop';
   const [updateState, setUpdateState] = useState(false);
   const [isCompletedState, setIsCompletedState] = useState(
     todoList.isCompleted,
@@ -27,22 +29,7 @@ export default function TodoDetail({ todoList }) {
       todo: todoState,
     });
   };
-  async function deleteTodo() {
-    const result = window.confirm('삭제하시겠습니까?');
-    if (result) {
-      try {
-        axios.defaults.headers.common['Authorization'] = '';
-        const JWTTOEKN = localStorage.getItem('ACCESS_TOKEN');
-        axios.defaults.headers.common['Authorization'] = `Bearer ${JWTTOEKN}`;
-        const res = await axios.delete(`/todos/${todoList.id}`, {
-          withCredentials: false,
-        });
-        window.location.reload();
-      } catch (error) {
-        console.log(error.response.data.message);
-      }
-    }
-  }
+
   async function putTodo() {
     const result = window.confirm('수정하시겠습니까?');
     if (result) {
@@ -66,18 +53,15 @@ export default function TodoDetail({ todoList }) {
   const onSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      console.log(todo);
-      putTodo();
+      putTodo(todoList.id, todo.todo, todo.isCompleted);
     },
     [isCompletedState, todoState, todo, isCompletedHandler, todoHandler],
   );
 
   const deleteOnClick = () => {
-    console.log('삭제 버튼 눌림');
-    deleteTodo();
+    removeTodo(todoList.id);
   };
   const updateOnClick = () => {
-    console.log('수정 버튼 눌림');
     setUpdateState(!updateState);
   };
   const removeUpdate = () => {

@@ -44,6 +44,7 @@ export const addTodo = async (newTodo) => {
 export const updateTodo = async ({ id, value, isCompleted }) => {
   const body = { todo: value, isCompleted };
   try {
+    console.log(id, value);
     await axiosInstance.put(`/todos/${id}`, body, {
       headers: {
         'Authorization': `Bearer ${accessToken}`,

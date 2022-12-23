@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Header from '../../components/Header';
 import { GlobalStyle2 } from '../../styles/GlobalStyle2';
 import * as S from './styled';
@@ -7,7 +6,6 @@ import TodoDetail from '../../components/TodoDetail';
 import { getTodos, addTodo } from '../../apis/todo';
 
 function Todo() {
-  axios.defaults.baseURL = 'https://pre-onboarding-selection-task.shop';
   const [todoLists, setTodoLists] = useState([]);
   const [todo, setTodo] = useState('');
 
