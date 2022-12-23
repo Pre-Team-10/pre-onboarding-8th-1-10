@@ -1,11 +1,13 @@
 import { instance } from '../utils/instance';
+import { setToken } from '../utils/token';
+import { SIGNUP_URL, SIGNIN_URL } from '../constants';
 
 /** 로그인 요청 */
 export const handleSignin = async (userInfo) => {
   await instance
-    .post('/auth/signin', userInfo)
+    .post(SIGNIN_URL, userInfo)
     .then((response) => {
-      localStorage.setItem('access_token', response.data.access_token);
+      setToken(response);
     })
     .catch((error) => {
       alert(error.response.data.message);
@@ -15,7 +17,7 @@ export const handleSignin = async (userInfo) => {
 /** 회원가입 요청 */
 export const handleSignup = async (userInfo) => {
   await instance
-    .post('/auth/signup', userInfo)
+    .post(SIGNUP_URL, userInfo)
     .then(() => {
       alert('회원가입을 완료하셧습니다.');
     })

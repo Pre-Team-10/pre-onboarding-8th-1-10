@@ -43,7 +43,7 @@ export const LoginButton = styled.button`
   border-radius: 5px;
   margin-top: 20px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: ${(props) => props.theme.fontSize.middle};
   &:hover {
     background-color: orangered;
   }
@@ -58,5 +58,67 @@ export const AccountText = styled.p`
     &:hover {
       color: red;
     }
+  }
+`;
+export const SignUpBTN = styled.span`
+  color: white;
+  cursor: pointer:
+`;
+export const Modal = styled.div`
+  display: ${(props) => (props.modal === true ? 'none' : 'block')};
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+`;
+
+export const WhiteModal = styled.div`
+  background-color: white;
+  width: 400px;
+  height: 500px;
+  margin: 0 auto;
+  margin-top: 7%;
+  text-align: center;
+  h2 {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding: 10px;
+    color: #666666;
+  }
+  input {
+    width: 300px;
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  div {
+    display: flex;
+    margin: 0 auto;
+    width: 330px;
+    text-align: initial;
+  }
+  .xMark {
+    font-size: 30px;
+    color: gray;
+    margin-left: 80%;
+    margin-top: 20px;
+    cursor: pointer;
+    &:hover {
+      color: orange;
+    }
+  }
+`;
+
+export const Button = styled.button`
+   {
+    margin-top: 30px;
+    padding: 15px;
+    width: 300px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: ${(props) => (props.isLoaded === false ? 'lightgray' : 'white')};
+    background-color: ${(props) =>
+      props.isLoaded === false ? '#765413' : 'orange'};
   }
 `;
