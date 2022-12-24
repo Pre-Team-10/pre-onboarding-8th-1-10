@@ -246,16 +246,12 @@ export const auth = async ({ email, password, isSignInPage, onSuccess }) => {
 
 ```js
 import { TODO_URL } from '../constants';
-import { axiosInstanceWithToken, showErrorToast } from '../utils';
-
-const serverProblemComment = '서버에 문제가 있습니다!';
-
-const tokenProblemComment = '토큰이 유효하지 않습니다! 재로그인해주세요!';
-
-export const serverStatus = {
-  noContent: 204,
-  unauthorized: 401,
-};
+import {
+  axiosInstanceWithToken,
+  serverStatus,
+  showErrorToast,
+  statusMessageObj,
+} from '../utils';
 
 const handleStatusCode = (e) => {
   const {
