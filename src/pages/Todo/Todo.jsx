@@ -10,10 +10,16 @@ function Todo() {
   const [todos, setTodos] = useState([]);
   const [targetTodoId, setTargetTodoId] = useState(-1);
   const createTodoInputRef = useRef(null);
+  const initializeUserInfo = () => {
+    deleteAccessToken();
+    navigate('/');
+  };
+
   const initializeUserInfo = useCallback(() => {
     deleteAccessToken();
     navigate('/');
-  }, [navigate]);
+  }, []);
+
   const handleOnNewTodoSubmit = async (e) => {
     e.preventDefault();
     const newTodoContent = createTodoInputRef.current.value;
@@ -25,6 +31,7 @@ function Todo() {
       } else initializeUserInfo();
     }
   };
+
   const handleOnDeleteTodo = useCallback(
     async (todoId) => {
       const isDeleteSuccessful = await deleteTodo(todoId);
@@ -36,12 +43,14 @@ function Todo() {
     },
     [initializeUserInfo],
   );
+
   const toggleModifyInputBar = useCallback((todoId) => {
     setTargetTodoId((targetTodoId) => {
       if (targetTodoId === todoId) return -1;
       return todoId;
     });
   }, []);
+  
   const handleOnModifyTodo = useCallback(
     async (
       targetTodoId,
@@ -70,15 +79,18 @@ function Todo() {
         } else initializeUserInfo();
       }
     },
-    [initializeUserInfo],
+    [],
   );
+  
   useEffect(() => {
     (async () => {
       const fetchedTodos = await fetchTodos();
       if (fetchedTodos) setTodos(fetchedTodos.reverse());
       else initializeUserInfo();
     })();
-  }, [initializeUserInfo]);
+
+  }, []);
+
   return (
     <Container>
       <SignOutBTN type="button" onClick={initializeUserInfo}>
