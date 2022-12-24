@@ -173,7 +173,6 @@ src
    ├─ styles
    │  ├─ GlobalStyle.js
    │  ├─ globalStyles.js
-   │  ├─ styleConstants.js
    │  ├─ styles.js
    │  └─ theme.js
    └─ utils

@@ -14,6 +14,12 @@ function Todo() {
     deleteAccessToken();
     navigate('/');
   };
+
+  const initializeUserInfo = useCallback(() => {
+    deleteAccessToken();
+    navigate('/');
+  }, []);
+
   const handleOnNewTodoSubmit = async (e) => {
     e.preventDefault();
     const newTodoContent = createTodoInputRef.current.value;
@@ -25,20 +31,26 @@ function Todo() {
       } else initializeUserInfo();
     }
   };
-  const handleOnDeleteTodo = useCallback(async (todoId) => {
-    const isDeleteSuccessful = await deleteTodo(todoId);
-    if (isDeleteSuccessful) {
-      setTodos((todos) => {
-        return todos.filter((todo) => todo.id !== todoId);
-      });
-    } else initializeUserInfo();
-  }, []);
+
+  const handleOnDeleteTodo = useCallback(
+    async (todoId) => {
+      const isDeleteSuccessful = await deleteTodo(todoId);
+      if (isDeleteSuccessful) {
+        setTodos((todos) => {
+          return todos.filter((todo) => todo.id !== todoId);
+        });
+      } else initializeUserInfo();
+    },
+    [initializeUserInfo],
+  );
+
   const toggleModifyInputBar = useCallback((todoId) => {
     setTargetTodoId((targetTodoId) => {
       if (targetTodoId === todoId) return -1;
       return todoId;
     });
   }, []);
+  
   const handleOnModifyTodo = useCallback(
     async (
       targetTodoId,
@@ -69,13 +81,16 @@ function Todo() {
     },
     [],
   );
+  
   useEffect(() => {
     (async () => {
       const fetchedTodos = await fetchTodos();
       if (fetchedTodos) setTodos(fetchedTodos.reverse());
       else initializeUserInfo();
     })();
+
   }, []);
+
   return (
     <Container>
       <SignOutBTN type="button" onClick={initializeUserInfo}>
