@@ -10,15 +10,11 @@ function Todo() {
   const [todos, setTodos] = useState([]);
   const [targetTodoId, setTargetTodoId] = useState(-1);
   const createTodoInputRef = useRef(null);
+
   const initializeUserInfo = () => {
     deleteAccessToken();
     navigate('/');
   };
-
-  const initializeUserInfo = useCallback(() => {
-    deleteAccessToken();
-    navigate('/');
-  }, []);
 
   const handleOnNewTodoSubmit = async (e) => {
     e.preventDefault();
@@ -50,7 +46,7 @@ function Todo() {
       return todoId;
     });
   }, []);
-  
+
   const handleOnModifyTodo = useCallback(
     async (
       targetTodoId,
@@ -81,14 +77,13 @@ function Todo() {
     },
     [],
   );
-  
+
   useEffect(() => {
     (async () => {
       const fetchedTodos = await fetchTodos();
       if (fetchedTodos) setTodos(fetchedTodos.reverse());
       else initializeUserInfo();
     })();
-
   }, []);
 
   return (
