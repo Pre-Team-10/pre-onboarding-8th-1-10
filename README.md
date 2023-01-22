@@ -13,10 +13,13 @@
 개발 기간: 22.12.20 ~ 22.12.23
 
 ### 배포 링크
+[https://pre-onboarding-8th-1-1-pre-team-10.vercel.app/](https://pre-onboarding-8th-1-1-pre-team-10.vercel.app/)
+- 프리티어 만료로 인해 aws 계정을 변경하기로 하여 기존 github actions로 배포 자동화를 적용한 s3 정적 웹 배포에서 vercel로 배포 링크를 수정하였습니다.
 
-[http://wanted-pre-onboarding-week-1.s3-website.ap-northeast-2.amazonaws.com/](http://wanted-pre-onboarding-week-1.s3-website.ap-northeast-2.amazonaws.com/)
 
-- Github Action + AWS S3 ⇒ CI/CD 파이프 라인 구축
+~~[http://wanted-pre-onboarding-week-1.s3-website.ap-northeast-2.amazonaws.com/](http://wanted-pre-onboarding-week-1.s3-website.ap-northeast-2.amazonaws.com/)~~
+
+~~- Github Action + AWS S3 ⇒ CI/CD 파이프 라인 구축~~
 
 ### 구동 방법
 
